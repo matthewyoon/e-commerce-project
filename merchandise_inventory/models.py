@@ -27,12 +27,12 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     product = db.relationship('Product', backref = 'owner', lazy = True)
     
-    def __init__(self,email,first_name = '', last_name = '', id = '', password = '', token = ''):
+    def __init__(self,first_name = '', last_name = '', email = '', password = '', token = ''):
         self.id = self.set_id()
         self.first_name = first_name
         self.last_name = last_name
-        self.password = self.set_password(password)
         self.email = email
+        self.password = self.set_password(password)
         self.token = self.set_token(24)
 
     def set_token(self,length):
@@ -56,11 +56,11 @@ class Product(db.Model):
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
-    def __init__(self, name, description, comics_appeared_in, super_power, user_token, id = ''):
+    def __init__(self, name, description, price, user_token, id = ''):
         self.id = self.set_id()
         self.name = name
         self.description = description
-        self.price = comics_appeared_in
+        self.price = price
         self.user_token = user_token
 
     def __repr__(self):
