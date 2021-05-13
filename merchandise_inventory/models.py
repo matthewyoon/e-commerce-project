@@ -52,7 +52,7 @@ class Product(db.Model):
     id = db.Column(db.String, primary_key = True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(200))
-    price = db.Column(db.Integer)
+    price = db.Column(db.Numeric(10,2))
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
